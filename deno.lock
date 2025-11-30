@@ -27,6 +27,7 @@
     "jsr:@std/uuid@^1.0.9": "1.0.9",
     "npm:@babel/core@^7.28.0": "7.28.5",
     "npm:@babel/preset-react@^7.27.1": "7.28.5_@babel+core@7.28.5",
+    "npm:@fontsource-variable/noto-sans-jp@^5.2.9": "5.2.9",
     "npm:@mjackson/node-fetch-server@0.7": "0.7.0",
     "npm:@opentelemetry/api@^1.9.0": "1.9.0",
     "npm:@preact/signals@^2.2.1": "2.5.1_preact@10.27.2",
@@ -475,6 +476,9 @@
       "integrity": "sha512-FaPsAHTwm+1Gfvn37Eg3E5HIpfR3i6x1AIcla/MkqAIupD4BW3MrSeUqfoTzwwJhk3WE2/KqUn4/eenEJC76VA==",
       "os": ["win32"],
       "cpu": ["x64"]
+    },
+    "@fontsource-variable/noto-sans-jp@5.2.9": {
+      "integrity": "sha512-osPL5f7dvGDjuMuFwDTGPLG37030D8X5zk+3BWea6txAVDFeE/ZIrKW0DY0uSDfRn9+NiKbiFn/2QvZveKXTog=="
     },
     "@jridgewell/gen-mapping@0.3.13": {
       "integrity": "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==",
@@ -1103,6 +1107,7 @@
     "dependencies": [
       "jsr:@fresh/core@^2.2.0",
       "jsr:@fresh/plugin-vite@^1.0.8",
+      "npm:@fontsource-variable/noto-sans-jp@^5.2.9",
       "npm:@preact/signals@^2.5.0",
       "npm:@tailwindcss/vite@^4.1.17",
       "npm:clsx@^2.1.1",
