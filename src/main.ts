@@ -1,5 +1,5 @@
 import { App, staticFiles, trailingSlashes } from "fresh";
-import { accessLogs } from "./middlewares/accessLogs.ts";
+import { accessLogs } from "~/middlewares/accessLogs.ts";
 
 export const app = new App()
   .use(staticFiles())
