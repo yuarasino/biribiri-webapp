@@ -61,5 +61,8 @@
     "types": [
       "vite/client"
     ]
-  }
+  },
+  "unstable": [
+    "broadcast-channel"
+  ]
 }
