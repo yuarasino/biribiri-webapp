@@ -117,7 +117,7 @@ export const HostConnection = defineComponent<HostConnectionProps>((
         }
       })
     );
-    await sleep(POWER_DELAY + LEVEL_DELAY * duration);
+    await sleep(POWER_DELAY + LEVEL_DELAY * level);
     for (let i = 0; i < duration; i++) {
       setGuests((prev) =>
         prev.map((guest) => {
@@ -197,9 +197,6 @@ export const HostConnection = defineComponent<HostConnectionProps>((
                 >
                   {guest.name}
                 </div>
-                <div class={cn("text-xs text-gray-400 font-mono hidden")}>
-                  {guest.uuid.slice(0, 8)}...
-                </div>
               </div>
 
               <div
@@ -219,17 +216,28 @@ export const HostConnection = defineComponent<HostConnectionProps>((
                   : <span class={cn("text-2xl")}>休電中</span>}
               </div>
 
-              <label class={cn("cursor-pointer w-full")}>
+              <label
+                class={cn(
+                  "w-full",
+                  guest.timer >= 0 ? "cursor-not-allowed" : "cursor-pointer",
+                )}
+              >
                 <input
                   type="checkbox"
                   value={guest.uuid}
                   checked={targets.includes(guest.uuid)}
                   onChange={onGuestChecked}
                   class={cn("peer sr-only")}
+                  disabled={guest.timer >= 0}
                 />
                 <div
                   class={cn(
-                    "w-full py-2 bg-gray-100 peer-checked:bg-blue-600 text-gray-600 peer-checked:text-white text-sm font-bold text-center rounded-lg transition-colors",
+                    "w-full py-2 text-sm font-bold text-center rounded-lg transition-colors",
+                    guest.timer >= 0
+                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      : targets.includes(guest.uuid)
+                      ? "bg-blue-600 text-white"
+                      : "bg-blue-100 text-blue-600 hover:bg-blue-200",
                   )}
                 >
                   {targets.includes(guest.uuid) ? "選択中" : "選択する"}
