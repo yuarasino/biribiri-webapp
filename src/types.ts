@@ -13,5 +13,7 @@ export type WebSocketMessage = {
   type: "launch";
   data: {
     targets: string[];
+    level: number;
+    duration: number;
   };
 };

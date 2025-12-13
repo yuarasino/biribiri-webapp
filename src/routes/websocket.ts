@@ -1,11 +1,11 @@
 import { define } from "~/utils/typing.ts";
-import { CHANNEL_UUID } from "~/consts.ts";
+import { HOST_UUID } from "~/consts.ts";
 
 export const handler = define.handlers({
   GET: ({ req }) => {
     const { socket, response } = Deno.upgradeWebSocket(req);
 
-    const channel = new BroadcastChannel(CHANNEL_UUID);
+    const channel = new BroadcastChannel(HOST_UUID);
 
     // ゲストが接続してきたとき
     channel.addEventListener("message", (event) => {
