@@ -171,10 +171,10 @@ export const HostConnection = defineComponent<HostConnectionProps>((
   return (
     <div class={cn("p-8 max-w-5xl mx-auto")}>
       <div class={cn("mb-12")}>
-        <h2 class={cn("text-2xl font-bold mb-6 text-gray-800")}>
+        <h2 class={cn("text-2xl font-bold mb-6 text-gray-800 text-center")}>
           接続中のゲスト
         </h2>
-        <div class={cn("flex flex-wrap gap-6")}>
+        <div class={cn("flex flex-wrap gap-6 justify-center")}>
           {guests.map((guest) => (
             <div
               key={guest.uuid}
@@ -257,9 +257,13 @@ export const HostConnection = defineComponent<HostConnectionProps>((
         </div>
       </div>
 
-      <div class={cn("bg-gray-50 border border-gray-200 rounded-xl p-6")}>
+      <div
+        class={cn(
+          "bg-gray-50 border border-gray-200 rounded-xl p-6 text-center",
+        )}
+      >
         <h3 class={cn("text-lg font-bold text-gray-700 mb-4")}>コントロール</h3>
-        <div class={cn("flex flex-wrap items-end gap-6")}>
+        <div class={cn("flex flex-wrap items-end gap-6 justify-center")}>
           <div class={cn("flex flex-col gap-2")}>
             <label class={cn("text-sm font-semibold text-gray-600")}>
               強度 (10～15)
@@ -297,7 +301,7 @@ export const HostConnection = defineComponent<HostConnectionProps>((
               </span>
             </div>
           </div>
-          <div class={cn("flex-1")} />
+          <div class={cn("flex-1 hidden md:block")} />
           <div>
             <button
               type="button"
