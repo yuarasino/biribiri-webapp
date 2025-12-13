@@ -22,6 +22,7 @@ export type Guest = {
   uuid: string;
   name: string;
   timer: number;
+  isRunning: boolean;
 };
 
 // deno-lint-ignore no-explicit-any
