@@ -17,3 +17,15 @@ export type WebSocketMessage = {
     duration: number;
   };
 };
+
+export type Guest = {
+  uuid: string;
+  name: string;
+  timer: number;
+};
+
+// deno-lint-ignore no-explicit-any
+export type NavigatorWithSerial = any;
+
+// deno-lint-ignore no-explicit-any
+export type SerialPort = any;
