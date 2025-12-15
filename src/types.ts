@@ -53,6 +53,6 @@ export type GuestWithPort = Guest & {
   port: SerialPort;
 };
 
-export type GuestWithIsSelected = Guest & {
-  isSelected: boolean;
+export type GuestWithIsTarget = Guest & {
+  isTarget: boolean;
 };

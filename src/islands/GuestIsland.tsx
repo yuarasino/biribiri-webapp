@@ -36,7 +36,7 @@ export const GuestIsland = defineComponent<GuestIslandProps>((
       const message = JSON.parse(event.data) as WebSocketMessage;
       if (message.type === "connect") {
         if (message.data.uuid === HOST_UUID) {
-          for (const guest of guestsRef.current) {
+          guestsRef.current.forEach((guest) => {
             const data: WebSocketMessage = {
               type: "connect",
               data: {
@@ -45,7 +45,7 @@ export const GuestIsland = defineComponent<GuestIslandProps>((
               },
             };
             socket.send(JSON.stringify(data));
-          }
+          });
         }
       }
       if (message.type === "name") {
@@ -60,7 +60,17 @@ export const GuestIsland = defineComponent<GuestIslandProps>((
         }));
       }
       if (message.type === "launch") {
-        for (const guest of guestsRef.current) {
+        setGuests(guestsRef.current.map((guest) => {
+          if (message.data.targets.includes(guest.uuid)) {
+            return {
+              ...guest,
+              isRunning: true,
+            };
+          }
+          return guest;
+        }));
+
+        guestsRef.current.forEach((guest) => {
           if (message.data.targets.includes(guest.uuid)) {
             const writer = guest.port.writable.getWriter();
             const encoder = new TextEncoder();
@@ -70,7 +80,7 @@ export const GuestIsland = defineComponent<GuestIslandProps>((
             writer.write(chunk);
             writer.releaseLock();
           }
-        }
+        });
       }
     });
 

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { HOST_NAME, HOST_UUID } from "~/consts.ts";
-import { GuestWithIsSelected, WebSocketMessage } from "~/types.ts";
+import { GuestWithIsTarget, WebSocketMessage } from "~/types.ts";
 import { defineComponent } from "~/utils/typing.ts";
 
 export type HostIslandProps = {
@@ -11,8 +11,8 @@ export const HostIsland = defineComponent<HostIslandProps>((
   { url },
 ) => {
   const [socket, setSocket] = useState<WebSocket | undefined>(undefined);
-  const [guests, setGuests] = useState<GuestWithIsSelected[]>([]);
-  const guestsRef = useRef<GuestWithIsSelected[]>(guests);
+  const [guests, setGuests] = useState<GuestWithIsTarget[]>([]);
+  const guestsRef = useRef<GuestWithIsTarget[]>(guests);
   guestsRef.current = guests;
 
   const [level, setLevel] = useState<number>(10);
@@ -48,12 +48,12 @@ export const HostIsland = defineComponent<HostIslandProps>((
           if (
             !guestsRef.current.some((guest) => guest.uuid === message.data.uuid)
           ) {
-            const guest: GuestWithIsSelected = {
+            const guest: GuestWithIsTarget = {
               uuid: message.data.uuid,
               name: message.data.name,
               timer: -1,
               isRunning: false,
-              isSelected: false,
+              isTarget: false,
             };
             setGuests(guestsRef.current.concat(guest));
           }
@@ -104,6 +104,24 @@ export const HostIsland = defineComponent<HostIslandProps>((
     socket.send(JSON.stringify(data));
   };
 
+  const onCheckInput = (event: Event, uuid: string) => {
+    if (!socket) {
+      return;
+    }
+    const target = event.target as HTMLInputElement;
+    const isTarget = target.checked;
+
+    setGuests(guests.map((guest) => {
+      if (guest.uuid === uuid) {
+        return {
+          ...guest,
+          isTarget: isTarget,
+        };
+      }
+      return guest;
+    }));
+  };
+
   const onLevelInput = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const level = Number(target.value);
@@ -124,7 +142,7 @@ export const HostIsland = defineComponent<HostIslandProps>((
     const data: WebSocketMessage = {
       type: "launch",
       data: {
-        targets: guests.filter((guest) => guest.isSelected).map((guest) =>
+        targets: guests.filter((guest) => guest.isTarget).map((guest) =>
           guest.uuid
         ),
         level: level,
@@ -143,6 +161,11 @@ export const HostIsland = defineComponent<HostIslandProps>((
               type="text"
               value={guest.name}
               onInput={(event) => onNameInput(event, guest.uuid)}
+            />
+            <input
+              type="checkbox"
+              checked={guest.isTarget}
+              onInput={(event) => onCheckInput(event, guest.uuid)}
             />
           </li>
         ))}
