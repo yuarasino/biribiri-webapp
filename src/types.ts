@@ -47,12 +47,9 @@ export type Guest = {
   name: string;
   timer: number;
   isRunning: boolean;
+  isTarget: boolean;
 };
 
 export type GuestWithPort = Guest & {
   port: SerialPort;
-};
-
-export type GuestWithIsTarget = Guest & {
-  isTarget: boolean;
 };
