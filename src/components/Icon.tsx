@@ -1,5 +1,5 @@
-import { defineComponent } from "~/utils/typing.ts";
 import { cn } from "~/utils/styling.ts";
+import { defineComponent } from "~/utils/typing.ts";
 
 export type IconProps = {
   class?: string;

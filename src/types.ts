@@ -10,12 +10,36 @@ export type WebSocketMessage = {
     uuid: string;
   };
 } | {
+  type: "name";
+  data: {
+    uuid: string;
+    name: string;
+  };
+} | {
   type: "launch";
   data: {
     targets: string[];
     level: number;
     duration: number;
   };
+};
+
+export type SerialPort = {
+  writable: WritableStream;
+  open: (
+    options?: { baudRate?: number },
+  ) => Promise<void>;
+  close: () => Promise<void>;
+};
+
+export type Serial = {
+  requestPort: (
+    options?: { filters?: { usbVendorId?: number }[] },
+  ) => Promise<SerialPort>;
+};
+
+export type NavigatorWithSerial = Navigator & {
+  serial: Serial;
 };
 
 export type Guest = {
@@ -25,8 +49,10 @@ export type Guest = {
   isRunning: boolean;
 };
 
-// deno-lint-ignore no-explicit-any
-export type NavigatorWithSerial = any;
+export type GuestWithPort = Guest & {
+  port: SerialPort;
+};
 
-// deno-lint-ignore no-explicit-any
-export type SerialPort = any;
+export type GuestWithIsSelected = Guest & {
+  isSelected: boolean;
+};

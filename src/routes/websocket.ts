@@ -1,5 +1,5 @@
-import { define } from "~/utils/typing.ts";
 import { HOST_UUID } from "~/consts.ts";
+import { define } from "~/utils/typing.ts";
 
 export const handler = define.handlers({
   GET: ({ req }) => {
