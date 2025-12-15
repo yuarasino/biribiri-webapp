@@ -22,7 +22,7 @@ export const HostIsland = defineComponent<HostIslandProps>((
   const [duration, setDuration] = useState<number>(5);
 
   const wsurl = url.protocol === "https:"
-    ? `wss://${url.origin}/websocket`
+    ? `wss://${url.host}/websocket`
     : "ws://localhost:8000/websocket";
 
   useEffect(() => {

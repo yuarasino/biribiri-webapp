@@ -24,7 +24,7 @@ export const GuestIsland = defineComponent<GuestIslandProps>((
   guestsRef.current = guests;
 
   const wsurl = url.protocol === "https:"
-    ? `wss://${url.origin}/websocket`
+    ? `wss://${url.host}/websocket`
     : "ws://localhost:8000/websocket";
 
   useEffect(() => {
